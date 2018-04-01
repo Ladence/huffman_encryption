@@ -1,0 +1,3 @@
+"E:\Program Files\CLion 2017.2.3\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\huff.dir/objects.a
+C:\MinGW\bin\ar.exe cr CMakeFiles\huff.dir/objects.a @CMakeFiles\huff.dir\objects1.rsp
+C:\MinGW\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\huff.dir/objects.a -Wl,--no-whole-archive  -o huff.exe -Wl,--out-implib,libhuff.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\huff.dir\linklibs.rsp
