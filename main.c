@@ -6,6 +6,9 @@
 
 #define FAILURE (-5)
 
+typedef unsigned long long ull;
+
+ull rdtsc();
 void print_help();
 
 int main(int argc, char **argv) {
@@ -14,10 +17,18 @@ int main(int argc, char **argv) {
         return FAILURE;
     }
     init();
+    ull firstPointTime, secondPointTime;
+
     if (strcmp(argv[1], "encode") == 0) {
+        firstPointTime = rdtsc();
         encode(argv[2], argv[3]);
+        secondPointTime = rdtsc();
+        printf("Time : %llu ns", secondPointTime - firstPointTime);
     } else if (strcmp(argv[1], "decode") == 0) {
+        firstPointTime = rdtsc();
         decode(argv[2], argv[3]);
+        secondPointTime = rdtsc();
+        printf("Time : %llu ns", secondPointTime - firstPointTime);
     } else {
         print_help();
     }
@@ -27,4 +38,10 @@ int main(int argc, char **argv) {
 
 void print_help() {
     fprintf(stderr, "USAGE ./huffman [encode/decode] <in> <out>");
+}
+
+inline ull rdtsc() {
+    unsigned int lo, hi;
+    asm volatile ( "rdtsc\n" : "=a" (lo), "=d" (hi) );
+    return ((ull)hi << 32) | lo;
 }
